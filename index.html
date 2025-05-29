@@ -1,78 +1,86 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>聯絡診所中</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>撥打電話中...</title>
   <style>
     body {
-      font-family: "Helvetica Neue", sans-serif;
+      font-family: Arial, sans-serif;
+      background-color: #f7fafc;
+      color: #2d3748;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
       text-align: center;
-      padding: 2em;
-      background-color: #f8f9fa;
-      color: #333;
     }
     h1 {
-      color: #2a7f62;
-      margin-bottom: 0.5em;
+      font-size: 2rem;
+      margin-bottom: 1rem;
     }
-    .loader {
-      border: 8px solid #f3f3f3;
-      border-top: 8px solid #2a7f62;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      animation: spin 1s linear infinite;
-      margin: 1.5em auto;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    .info {
-      margin-top: 1em;
-      font-size: 1rem;
-      color: #555;
+    p {
+      font-size: 1.2rem;
     }
   </style>
 </head>
 <body>
-  <h1>正在聯絡診所中...</h1>
-  <div class="loader"></div>
-  <div class="info" id="result">請稍候，我們會將確認結果回傳至 LINE。</div>
+  <div class="container">
+    <h1>請稍候，我們正在撥打診所電話...</h1>
+    <p>若未自動撥號，請點擊下方按鈕手動撥打</p>
+    <a id="manualCall" href="#" style="font-size: 1.5rem; color: blue;">📞 撥打電話</a>
+  </div>
 
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const clinicName = params.get("clinicName");
-    const clinicPhone = params.get("clinicPhone");
-    const clientName = params.get("clientName");
-    const clientPhone = params.get("clientPhone");
-    const clientEmail = params.get("clientEmail");
-    const clientSymptoms = params.get("clientSymptoms");
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const clinicName = params.get("clinicName") || "";
+      const clinicPhone = params.get("clinicPhone") || "";
+      const clientName = params.get("clientName") || "";
+      const clientPhone = params.get("clientPhone") || "";
+      const clientEmail = params.get("clientEmail") || "";
+      const clientSymptoms = params.get("clientSymptoms") || "";
 
-    fetch("https://sgh.zeabur.app/webhook/891ms", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+      const data = {
         clinicName,
         clinicPhone,
         clientName,
         clientPhone,
         clientEmail,
         clientSymptoms
-      })
-    })
-    .then(response => {
-      if (response.ok) {
-        document.getElementById("result").textContent = "✅ 已成功送出聯絡請求！我們稍後會回覆您。";
-      } else {
-        document.getElementById("result").textContent = "⚠️ 送出失敗，請稍後再試。";
+      };
+
+      // 只送一次，防止重複觸發
+      const onceKey = `webhook_sent_${clinicPhone}_${clientPhone}`;
+      if (!localStorage.getItem(onceKey)) {
+        fetch("https://sgh.zeabur.app/webhook/891ms", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        })
+        .then(() => {
+          console.log("✅ Webhook sent");
+          localStorage.setItem(onceKey, "true");
+        })
+        .catch(err => console.error("❌ Webhook error:", err));
       }
-    })
-    .catch(err => {
-      document.getElementById("result").textContent = "❌ 發生錯誤，請稍後再試。";
-      console.error(err);
-    });
+
+      // 設定手動撥號連結
+      const telLink = `tel:${clinicPhone}`;
+      const manualCall = document.getElementById("manualCall");
+      manualCall.href = telLink;
+
+      // 嘗試自動撥號（對 LINE 有效）
+      setTimeout(() => {
+        window.location.href = telLink;
+      }, 2000);
+    })();
   </script>
 </body>
 </html>
