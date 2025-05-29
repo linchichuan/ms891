@@ -1,97 +1,78 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="zh-Hant">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.6">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Songti TC'; -webkit-text-stroke: #000000}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Songti TC'; -webkit-text-stroke: #000000; min-height: 17.0px}
-    span.s1 {font-kerning: none}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>聯絡診所中</title>
+  <style>
+    body {
+      font-family: "Helvetica Neue", sans-serif;
+      text-align: center;
+      padding: 2em;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+    h1 {
+      color: #2a7f62;
+      margin-bottom: 0.5em;
+    }
+    .loader {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #2a7f62;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+      margin: 1.5em auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .info {
+      margin-top: 1em;
+      font-size: 1rem;
+      color: #555;
+    }
   </style>
 </head>
 <body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html lang="zh-Hant"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;head&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"/&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;title&gt;聯絡診所中&lt;/title&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;style&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>body {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-family: "Helvetica Neue", sans-serif;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>text-align: center;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding: 2em;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background-color: #f8f9fa;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color: #333;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>h1 {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color: #2a7f62;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-bottom: 0.5em;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.loader {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border: 8px solid #f3f3f3;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-top: 8px solid #2a7f62;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius: 50%;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>width: 60px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>height: 60px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>animation: spin 1s linear infinite;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin: 1.5em auto;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>@keyframes spin {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>0% { transform: rotate(0deg); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>100% { transform: rotate(360deg); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.info {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-top: 1em;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size: 1rem;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color: #555;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
-<p class="p1"><span class="s1">&lt;body&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;h1&gt;正在聯絡診所中...&lt;/h1&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="loader"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="info" id="result"&gt;請稍候，我們會將確認結果回傳至 LINE。&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;script&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>console.log("📦 Calling page loaded");</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const params = new URLSearchParams(window.location.search);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const clinicName = params.get("clinicName");</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const clinicPhone = params.get("clinicPhone");</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const clientName = params.get("clientName");</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const clientPhone = params.get("clientPhone");</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const clientEmail = params.get("clientEmail");</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const clientSymptoms = params.get("clientSymptoms");</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>fetch("https://sgh.zeabur.app/webhook/891ms", {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>method: "POST",</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>headers: { "Content-Type": "application/json" },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>body: JSON.stringify({</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>clinicName,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>clinicPhone,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>clientName,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>clientPhone,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>clientEmail,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>clientSymptoms</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>})</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>})</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.then(response =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>if (response.ok) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>document.getElementById("result").textContent = "✅ 已成功送出聯絡請求！我們稍後會回覆您。";</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>} else {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>document.getElementById("result").textContent = "⚠️ 發送失敗，請稍後再試。";</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>})</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.catch(err =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>document.getElementById("result").textContent = "❌ 發生錯誤，請稍後再試。";</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>console.error(err);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+  <h1>正在聯絡診所中...</h1>
+  <div class="loader"></div>
+  <div class="info" id="result">請稍候，我們會將確認結果回傳至 LINE。</div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const clinicName = params.get("clinicName");
+    const clinicPhone = params.get("clinicPhone");
+    const clientName = params.get("clientName");
+    const clientPhone = params.get("clientPhone");
+    const clientEmail = params.get("clientEmail");
+    const clientSymptoms = params.get("clientSymptoms");
+
+    fetch("https://sgh.zeabur.app/webhook/891ms", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        clinicName,
+        clinicPhone,
+        clientName,
+        clientPhone,
+        clientEmail,
+        clientSymptoms
+      })
+    })
+    .then(response => {
+      if (response.ok) {
+        document.getElementById("result").textContent = "✅ 已成功送出聯絡請求！我們稍後會回覆您。";
+      } else {
+        document.getElementById("result").textContent = "⚠️ 送出失敗，請稍後再試。";
+      }
+    })
+    .catch(err => {
+      document.getElementById("result").textContent = "❌ 發生錯誤，請稍後再試。";
+      console.error(err);
+    });
+  </script>
 </body>
 </html>
