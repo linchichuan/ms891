@@ -1,52 +1,82 @@
-(function () {
-  const params = new URLSearchParams(window.location.search);
-  const clinicName = params.get("clinicName") || "";
-  const clinicPhone = params.get("clinicPhone") || "";
-  const clientName = params.get("clientName") || "";
-  const clientPhone = params.get("clientPhone") || "";
-  const clientEmail = params.get("clientEmail") || "";
-  const clientSymptoms = params.get("clientSymptoms") || "";
-  const userId = params.get("userId") || "";
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>撥打電話中...</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7fafc;
+      color: #2d3748;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      text-align: center;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>請稍候，我們正在撥打診所電話...</h1>
+    <p>若未自動撥號，請點擊下方按鈕手動撥打</p>
+    <a id="manualCall" href="#" style="font-size: 1.5rem; color: blue;">📞 撥打電話</a>
+  </div>
 
-  const data = {
-    clinicName,
-    clinicPhone,
-    clientName,
-    clientPhone,
-    clientEmail,
-    clientSymptoms,
-    userId
-  };
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const clinicName = params.get("clinicName") || "";
+      const clinicPhone = params.get("clinicPhone") || "";
+      const clientName = params.get("clientName") || "";
+      const clientPhone = params.get("clientPhone") || "";
+      const clientEmail = params.get("clientEmail") || "";
+      const clientSymptoms = params.get("clientSymptoms") || "";
+      const userId = params.get("userId") || "";
 
-  const todayKey = new Date().toISOString().slice(0, 10);
-  const counterKey = `call_count_${userId}_${todayKey}`;
-  let callCount = parseInt(localStorage.getItem(counterKey) || "0");
+      const data = {
+        clinicName,
+        clinicPhone,
+        clientName,
+        clientPhone,
+        clientEmail,
+        clientSymptoms,
+        userId
+      };
 
-  if (callCount >= 3) {
-    document.querySelector(".container").innerHTML = `
-      <h1>⚠️ 今日撥打次數已達上限</h1>
-      <p>您今天已撥打 3 通電話，請明天再試。</p>
-    `;
-    return;
-  }
+      // 傳送 webhook
+      fetch("https://sgh.zeabur.app/webhook/891ms", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+      .then(() => console.log("✅ Webhook sent"))
+      .catch(err => console.error("❌ Webhook error:", err));
 
-  // 記錄已撥打，並送 webhook
-  fetch("https://sgh.zeabur.app/webhook/891ms", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data)
-  })
-    .then(() => {
-      console.log("✅ Webhook sent");
-      localStorage.setItem(counterKey, (callCount + 1).toString());
-    })
-    .catch(err => console.error("❌ Webhook error:", err));
+      // 設定手動撥號連結
+      const telLink = `tel:${clinicPhone}`;
+      const manualCall = document.getElementById("manualCall");
+      manualCall.href = telLink;
 
-  const telLink = `tel:${clinicPhone}`;
-  const manualCall = document.getElementById("manualCall");
-  manualCall.href = telLink;
-
-  setTimeout(() => {
-    window.location.href = telLink;
-  }, 2000);
-})();
+      // 自動撥號
+      setTimeout(() => {
+        window.location.href = telLink;
+      }, 2000);
+    })();
+  </script>
+</body>
+</html>
