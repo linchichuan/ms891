@@ -38,41 +38,40 @@
   <script>
     (function () {
       const params = new URLSearchParams(window.location.search);
-      const clinicName = params.get("clinicName") || "";
-      const clinicPhone = params.get("clinicPhone") || "";
-      const clientName = params.get("clientName") || "";
-      const clientPhone = params.get("clientPhone") || "";
-      const clientEmail = params.get("clientEmail") || "";
-      const clientSymptoms = params.get("clientSymptoms") || "";
-      const userId = params.get("userId") || "";
+      const requiredParams = ["clinicName", "clinicPhone", "clientName", "clientPhone", "clientSymptoms", "userId"];
+      const missingParams = requiredParams.filter(param => !params.get(param));
+
+      if (missingParams.length > 0) {
+        alert("⚠️ 部分必要資訊缺失：" + missingParams.join(", "));
+        console.error("⚠️ Missing parameters:", missingParams);
+        return;
+      }
 
       const data = {
-        clinicName,
-        clinicPhone,
-        clientName,
-        clientPhone,
-        clientEmail,
-        clientSymptoms,
-        userId
+        clinicName: params.get("clinicName"),
+        clinicPhone: params.get("clinicPhone"),
+        clientName: params.get("clientName"),
+        clientPhone: params.get("clientPhone"),
+        clientEmail: params.get("clientEmail") || "",
+        clientSymptoms: params.get("clientSymptoms"),
+        userId: params.get("userId")
       };
 
       // 傳送 webhook
       fetch("https://sgh.zeabur.app/webhook/891ms", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
       })
-      .then(() => console.log("✅ Webhook sent"))
+      .then(() => console.log("✅ Webhook sent:", data))
       .catch(err => console.error("❌ Webhook error:", err));
 
-      // 設定手動撥號連結
-      const telLink = `tel:${clinicPhone}`;
+      // 設定撥號連結
+      const telLink = `tel:${data.clinicPhone}`;
       const manualCall = document.getElementById("manualCall");
       manualCall.href = telLink;
 
-      // 自動撥號
+      // 2秒後自動撥號
       setTimeout(() => {
         window.location.href = telLink;
       }, 2000);
