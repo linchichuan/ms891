@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>撥打電話中...</title>
+  <title>醫療助手AI正在確認中...</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -18,6 +18,7 @@
     }
     .container {
       text-align: center;
+      padding: 20px;
     }
     h1 {
       font-size: 2rem;
@@ -25,56 +26,41 @@
     }
     p {
       font-size: 1.2rem;
+      line-height: 1.5;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>請稍候，我們正在撥打診所電話...</h1>
-    <p>若未自動撥號，請點擊下方按鈕手動撥打</p>
-    <a id="manualCall" href="#" style="font-size: 1.5rem; color: blue;">📞 撥打電話</a>
+    <h1>醫療助手AI正在為您確認...</h1>
+    <p>我們已經代為聯繫診所進行確認。<br>
+    請您稍候，可先關閉此頁面，確認結果將透過 LINE 通知您。</p>
   </div>
 
   <script>
     (function () {
       const params = new URLSearchParams(window.location.search);
-      const requiredParams = ["clinicName", "clinicPhone", "clientName", "clientPhone", "clientSymptoms", "userId"];
-      const missingParams = requiredParams.filter(param => !params.get(param));
-
-      if (missingParams.length > 0) {
-        alert("⚠️ 部分必要資訊缺失：" + missingParams.join(", "));
-        console.error("⚠️ Missing parameters:", missingParams);
-        return;
-      }
-
       const data = {
-        clinicName: params.get("clinicName"),
-        clinicPhone: params.get("clinicPhone"),
-        clientName: params.get("clientName"),
-        clientPhone: params.get("clientPhone"),
+        clinicName: params.get("clinicName") || "",
+        clinicPhone: params.get("clinicPhone") || "",
+        clientName: params.get("clientName") || "",
+        clientPhone: params.get("clientPhone") || "",
         clientEmail: params.get("clientEmail") || "",
-        clientSymptoms: params.get("clientSymptoms"),
-        userId: params.get("userId")
+        clientSymptoms: params.get("clientSymptoms") || "",
+        userId: params.get("userId") || ""
       };
 
       // 傳送 webhook
       fetch("https://sgh.zeabur.app/webhook/891ms", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify(data)
       })
-      .then(() => console.log("✅ Webhook sent:", data))
+      .then(() => console.log("✅ Webhook sent"))
       .catch(err => console.error("❌ Webhook error:", err));
 
-      // 設定撥號連結
-      const telLink = `tel:${data.clinicPhone}`;
-      const manualCall = document.getElementById("manualCall");
-      manualCall.href = telLink;
-
-      // 2秒後自動撥號
-      setTimeout(() => {
-        window.location.href = telLink;
-      }, 2000);
     })();
   </script>
 </body>
